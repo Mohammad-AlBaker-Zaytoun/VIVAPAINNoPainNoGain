@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SpecificGymDetailed">
+
+    <Button
+        android:id="@+id/BackBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/gymNameTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="96dp"
+        android:fontFamily="@font/archivo_black"
+        android:text="@string/gym_name"
+        android:textColor="#D64F4F"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/gLocationTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="80dp"
+        android:text="@string/location"
+        app:layout_constraintStart_toStartOf="@+id/gymNameTxt"
+        app:layout_constraintTop_toBottomOf="@+id/gymNameTxt" />
+
+    <TextView
+        android:id="@+id/gPhoneNumberTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/phone_number"
+        app:layout_constraintEnd_toEndOf="@+id/gLocationTxt"
+        app:layout_constraintStart_toStartOf="@+id/gLocationTxt"
+        app:layout_constraintTop_toBottomOf="@+id/gLocationTxt" />
+
+    <TextView
+        android:id="@+id/gGenderAllowedTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/gender_allowed"
+        app:layout_constraintEnd_toEndOf="@+id/gPhoneNumberTxt"
+        app:layout_constraintStart_toStartOf="@+id/gPhoneNumberTxt"
+        app:layout_constraintTop_toBottomOf="@+id/gPhoneNumberTxt" />
+
+    <TextView
+        android:id="@+id/gDailyEntryPriceTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/daily_entry_price"
+        app:layout_constraintEnd_toEndOf="@+id/gGenderAllowedTxt"
+        app:layout_constraintStart_toStartOf="@+id/gGenderAllowedTxt"
+        app:layout_constraintTop_toBottomOf="@+id/gGenderAllowedTxt" />
+
+    <TextView
+        android:id="@+id/gMonthlyPriceTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/month_plan_price"
+        app:layout_constraintEnd_toEndOf="@+id/gDailyEntryPriceTxt"
+        app:layout_constraintStart_toStartOf="@+id/gDailyEntryPriceTxt"
+        app:layout_constraintTop_toBottomOf="@+id/gDailyEntryPriceTxt" />
+
+    <TextView
+        android:id="@+id/gWorkingTimesTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/working_times"
+        app:layout_constraintEnd_toEndOf="@+id/gMonthlyPriceTxt"
+        app:layout_constraintStart_toStartOf="@+id/gMonthlyPriceTxt"
+        app:layout_constraintTop_toBottomOf="@+id/gMonthlyPriceTxt" />
+
+    <RatingBar
+        android:id="@+id/gymRatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:progressTint="#E71399"
+        android:rating="2.5"
+        android:progressBackgroundTint="@color/blueBlack"
+        app:layout_constraintTop_toBottomOf="@+id/gWorkingTimesTxt" />
+
+    <TextView
+        android:id="@+id/textView42"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="@string/location"
+        app:layout_constraintEnd_toStartOf="@+id/gLocationTxt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gymNameTxt" />
+
+    <TextView
+        android:id="@+id/textView43"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Phone Number"
+        app:layout_constraintEnd_toEndOf="@+id/textView42"
+        app:layout_constraintStart_toStartOf="@+id/textView42"
+        app:layout_constraintTop_toBottomOf="@+id/textView42" />
+
+    <TextView
+        android:id="@+id/textView44"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/allowed_gender"
+        app:layout_constraintEnd_toEndOf="@+id/textView43"
+        app:layout_constraintStart_toStartOf="@+id/textView43"
+        app:layout_constraintTop_toBottomOf="@+id/textView43" />
+
+    <TextView
+        android:id="@+id/textView45"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Daily Entry Price"
+        app:layout_constraintEnd_toEndOf="@+id/textView44"
+        app:layout_constraintStart_toStartOf="@+id/textView44"
+        app:layout_constraintTop_toBottomOf="@+id/textView44" />
+
+    <TextView
+        android:id="@+id/textView46"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/monthly_subscription"
+        app:layout_constraintEnd_toEndOf="@+id/textView45"
+        app:layout_constraintStart_toStartOf="@+id/textView45"
+        app:layout_constraintTop_toBottomOf="@+id/textView45" />
+
+    <TextView
+        android:id="@+id/textView47"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/open_hours"
+        app:layout_constraintEnd_toEndOf="@+id/textView46"
+        app:layout_constraintStart_toStartOf="@+id/textView46"
+        app:layout_constraintTop_toBottomOf="@+id/textView46" />
+</androidx.constraintlayout.widget.ConstraintLayout>

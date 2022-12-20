@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GymOwnerAuthentication">
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/log_in" />
+
+    <Button
+        android:id="@+id/signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login"
+        android:layout_centerHorizontal="true"
+        android:text="@string/sign_up" />
+
+    <Button
+        android:id="@+id/BackBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/login"
+        android:layout_alignStart="@+id/login"
+        android:layout_alignEnd="@+id/login"
+        android:layout_marginStart="-55dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="-54dp"
+        android:layout_marginBottom="151dp"
+        app:srcCompat="@drawable/onlylogoviva" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="291dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/login"
+        android:layout_alignStart="@+id/imageView7"
+        android:layout_alignEnd="@+id/imageView7"
+        android:layout_marginStart="-45dp"
+        android:layout_marginEnd="-45dp"
+        android:layout_marginBottom="66dp"
+        android:text="Login if you are a gym owner and let others \n                 know that your gym exists!" />
+
+    <TextView
+        android:id="@+id/continueWithoutSignup"
+        android:layout_width="181dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/signup"
+        android:layout_alignStart="@+id/signup"
+        android:layout_alignEnd="@+id/signup"
+        android:layout_marginStart="-31dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="-57dp"
+        android:text="continue without signing in?"
+        android:textColor="#2196F3" />
+
+
+</RelativeLayout>
