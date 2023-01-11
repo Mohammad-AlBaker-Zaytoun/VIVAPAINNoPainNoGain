@@ -16,6 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
@@ -33,11 +35,19 @@ public class MainActivity extends AppCompatActivity {
     ImageButton homeRedirect, mapRedirect;
     boolean WifiConnected = false;
     boolean MobileDataConnected = false;
+    boolean isLogged = false;
 
     private RetrofitInterface retrofitInterface;
 
+    SharedPreferences myPreferences;
+    SharedPreferences.Editor myEditor;
+
     SharedPreferences UserPrefs;
     private static final String USER_PREFS = "signedIn";
+    private static final String DATE = "DATE";
+
+    LocalDate todayDate;
+    long daysDiff;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +58,15 @@ public class MainActivity extends AppCompatActivity {
         String baseURL = "http://10.0.2.2:3000";
         Retrofit retrofit = new Retrofit.Builder().baseUrl(baseURL).addConverterFactory(GsonConverterFactory.create()).build();
         retrofitInterface = retrofit.create(RetrofitInterface.class);
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            todayDate = LocalDate.now();
+            myPreferences = getSharedPreferences(DATE, Context.MODE_PRIVATE);
+            myEditor = myPreferences.edit();
+            myEditor.putString("DATE", String.valueOf(todayDate));
+            myEditor.apply();
+        }
+
 
         trainMuscle = findViewById(R.id.Activities);
         diet = findViewById(R.id.Get_Your_Diet);
@@ -63,6 +82,17 @@ public class MainActivity extends AppCompatActivity {
         getGymsList();
 
         getHistory();
+
+        getLastUpdated();
+
+        UserPrefs = getSharedPreferences(USER_PREFS, Context.MODE_PRIVATE);
+        isLogged = UserPrefs.getBoolean("isLogged", false);
+
+        if (isLogged) {
+            initDateDifference();
+        } else {
+            NONE();
+        }
 
         if (firstStart) {
             showStartDialog();
@@ -80,6 +110,113 @@ public class MainActivity extends AppCompatActivity {
         if (isChecked) {
             initCheckWifi();
         }
+    }
+
+    private void NONE() {
+
+    }
+
+    private void initDateDifference() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            myPreferences = getSharedPreferences(DATE, Context.MODE_PRIVATE);
+            String lastUpdated = myPreferences.getString("LAST_DATE", String.valueOf(LocalDate.now()));
+            String NOW = myPreferences.getString("DATE", String.valueOf(LocalDate.now()));
+
+            LocalDate dateBefore = LocalDate.parse(lastUpdated);
+            LocalDate dateAfter = LocalDate.parse(NOW);
+            daysDiff = dateBefore.until(dateAfter, ChronoUnit.DAYS);
+            Log.d("DAYS DIF", String.valueOf(daysDiff));
+
+            myPreferences = getSharedPreferences(DATE, Context.MODE_PRIVATE);
+            myEditor = myPreferences.edit();
+            myEditor.putLong("DATE_DIFF", daysDiff);
+            myEditor.apply();
+
+        }
+
+    }
+
+    private void getLastUpdated() {
+        UserPrefs = getSharedPreferences(USER_PREFS, Context.MODE_PRIVATE);
+        String userType = UserPrefs.getString("userType", "userType");
+        String name = UserPrefs.getString("userName", "userName");
+        Log.d("USERNAME", name);
+        Log.d("USER TYPE", userType);
+        String userEmail = UserPrefs.getString("userEmail", "userEmail");
+        String userPassword = UserPrefs.getString("userPassword", "userPassword");
+
+        if (userType.equals("GymOwner")) {
+            HashMap<String, String> map = new HashMap<>();
+
+            map.put("email", userEmail);
+            map.put("password", userPassword);
+
+            Call<LoginResult> call = retrofitInterface.executeLogin(map);
+            call.enqueue(new Callback<LoginResult>() {
+                @Override
+                public void onResponse(@NonNull Call<LoginResult> call, @NonNull Response<LoginResult> response) {
+                    if (response.code() == 200) {
+                        LoginResult result = response.body();
+                        assert result != null;
+                        if (result.getLastUpdated() == null || result.getLastUpdated().equals("0")) {
+                            myPreferences = getSharedPreferences(DATE, Context.MODE_PRIVATE);
+                            myEditor = myPreferences.edit();
+                            myEditor.putString("LAST_DATE", "2001-1-1");
+                            myEditor.apply();
+                        } else {
+                            myPreferences = getSharedPreferences(DATE, Context.MODE_PRIVATE);
+                            myEditor = myPreferences.edit();
+                            myEditor.putString("LAST_DATE", result.getLastUpdated());
+                            myEditor.apply();
+                        }
+                    } else if (response.code() == 400) {
+                        Log.d("ERROR 400", "UNKNOWN ERROR!");
+                    }
+
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<LoginResult> call, @NonNull Throwable t) {
+                    Log.d("ERROR", "UNKNOWN ERROR!");
+                }
+            });
+        } else if (userType.equals("normalUser")) {
+            HashMap<String, String> map = new HashMap<>();
+
+            map.put("email", userEmail);
+            map.put("password", userPassword);
+
+            Call<LoginResult1> call = retrofitInterface.executeLogin1(map);
+            call.enqueue(new Callback<LoginResult1>() {
+                @Override
+                public void onResponse(@NonNull Call<LoginResult1> call, @NonNull Response<LoginResult1> response) {
+                    if (response.code() == 200) {
+                        LoginResult1 result = response.body();
+                        assert result != null;
+                        if (result.getLastUpdated() == null || result.getLastUpdated().equals("0")) {
+                            myPreferences = getSharedPreferences(DATE, Context.MODE_PRIVATE);
+                            myEditor = myPreferences.edit();
+                            myEditor.putString("LAST_DATE", "2001-1-1");
+                            myEditor.apply();
+                        } else {
+                            myPreferences = getSharedPreferences(DATE, Context.MODE_PRIVATE);
+                            myEditor = myPreferences.edit();
+                            myEditor.putString("LAST_DATE", result.getLastUpdated());
+                            myEditor.apply();
+                        }
+                    } else if (response.code() == 400) {
+                        Log.d("ERROR 400", "UNKNOWN ERROR!");
+                    }
+
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<LoginResult1> call, @NonNull Throwable t) {
+                    Log.d("ERROR", "UNKNOWN ERROR!");
+                }
+            });
+        }
+
     }
 
     private void getHistory() {
@@ -100,6 +237,8 @@ public class MainActivity extends AppCompatActivity {
                         ArrayList<UserHistoryModule> details = response.body();
                         PrefConfig_History.writeListInPref(getApplicationContext(), details);
                         Log.d("GymOwner History Retrieve", "GymOwner history retrieval was a success.");
+                        assert details != null;
+                        Log.d("GymOwner History Amount", String.valueOf(details.size()));
                     } else if (response.code() == 400) {
                         Log.d("GymOwner History Retrieve", "GymOwner history retrieval failed.");
                     }
@@ -123,6 +262,8 @@ public class MainActivity extends AppCompatActivity {
                         ArrayList<UserHistoryModule> details = response.body();
                         PrefConfig_History.writeListInPref(getApplicationContext(), details);
                         Log.d("User History Retrieve", "User history retrieval was a success.");
+                        assert details != null;
+                        Log.d("User History Amount", String.valueOf(details.size()));
                     } else if (response.code() == 400) {
                         Log.d("User History Retrieve", "User history retrieval failed.");
                     }
@@ -160,9 +301,18 @@ public class MainActivity extends AppCompatActivity {
 
     private void initProfile() {
         profile.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, Profile.class);
+            UserPrefs = getSharedPreferences(USER_PREFS, Context.MODE_PRIVATE);
+            isLogged = UserPrefs.getBoolean("isLogged", false);
+            Intent intent;
+            if (isLogged) {
+                intent = new Intent(MainActivity.this, Profile.class);
+            } else {
+                intent = new Intent(MainActivity.this, globalAuthentication.class);
+            }
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
+
+
         });
     }
 

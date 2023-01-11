@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Objects;
@@ -93,7 +95,7 @@ public class AddGym extends AppCompatActivity {
 
                         builder1.show();
                     } else if (response.code() == 400) {
-                        Toast.makeText(AddGym.this, "SERVER ERROR", Toast.LENGTH_LONG).show();
+                        Toast.makeText(AddGym.this, "ALREADY REQUESTED!", Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -113,6 +115,27 @@ public class AddGym extends AppCompatActivity {
     }
 
     private void initCancel() {
+
+        Call<ArrayList<gymDetailsModule>> call = retrofitInterface.executeGymDetails();
+        call.enqueue(new Callback<ArrayList<gymDetailsModule>>() {
+            @Override
+            public void onResponse(@NonNull Call<ArrayList<gymDetailsModule>> call, @NonNull Response<ArrayList<gymDetailsModule>> response) {
+                if (response.code() == 200) {
+                    ArrayList<gymDetailsModule> details = response.body();
+                    PrefConfig.writeListInPref(getApplicationContext(), details);
+                    Log.d("gyms detailed retrieve", "Gyms retrieval was a success.");
+                } else if (response.code() == 400) {
+                    Log.d("gyms detailed retrieve", "Gyms retrieval failed.");
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ArrayList<gymDetailsModule>> call, @NonNull Throwable t) {
+                Log.w("gyms detailed retrieve", "Gyms retrieval failed" + t.getMessage());
+            }
+        });
+
+
         cancelBtn.setOnClickListener(v -> {
             Intent intent = new Intent(AddGym.this, gym_detailed.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

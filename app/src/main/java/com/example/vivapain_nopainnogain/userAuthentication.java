@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Objects;
@@ -40,6 +42,7 @@ public class userAuthentication extends AppCompatActivity {
     SharedPreferences myPreferences;
     SharedPreferences.Editor myEditor;
     private static final String USER_PREFS = "signedIn";
+    private static final String DATE = "DATE";
 
     @SuppressLint("SimpleDateFormat")
     SimpleDateFormat sdf = new SimpleDateFormat("y:M");
@@ -146,6 +149,9 @@ public class userAuthentication extends AppCompatActivity {
             map.put("weight", weightEdit.getText().toString());
             map.put("email", emailEdit.getText().toString());
             map.put("password", passwordEdit.getText().toString());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                map.put("lastUpdated", String.valueOf(LocalDate.now()));
+            }
 
             Call<Void> call = retrofitInterface.executeSignup1(map);
             call.enqueue(new Callback<Void>() {
@@ -165,6 +171,7 @@ public class userAuthentication extends AppCompatActivity {
                         myPreferences = getSharedPreferences(USER_PREFS, Context.MODE_PRIVATE);
                         myEditor = myPreferences.edit();
                         myEditor.putString("userType", "Trainee");
+                        myEditor.putBoolean("isLogged", true);
                         myEditor.putString("userCreatedAt", date);
                         myEditor.putString("userName", nameEdit.getText().toString());
                         myEditor.putString("userEmail", emailEdit.getText().toString());
@@ -174,6 +181,13 @@ public class userAuthentication extends AppCompatActivity {
                         myEditor.putInt("userLostWeight", 0);
                         myEditor.putInt("userGainedWeight", 0);
                         myEditor.putInt("userTrainedHrs", 0);
+                        myEditor.apply();
+
+                        myPreferences = getSharedPreferences(DATE, Context.MODE_PRIVATE);
+                        myEditor = myPreferences.edit();
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            myEditor.putString("LAST_DATE", String.valueOf(LocalDate.now()));
+                        }
                         myEditor.apply();
                     } else if (response.code() == 400) {
                         Toast.makeText(userAuthentication.this, "Already registered", Toast.LENGTH_LONG).show();
@@ -211,17 +225,12 @@ public class userAuthentication extends AppCompatActivity {
                 public void onResponse(@NonNull Call<LoginResult1> call, @NonNull Response<LoginResult1> response) {
                     if (response.code() == 200) {
                         LoginResult1 result = response.body();
-                        AlertDialog.Builder builder1 = new AlertDialog.Builder(userAuthentication.this);
-                        assert result != null;
-                        builder1.setTitle("Hello " + result.getName());
-                        builder1.setMessage(" Email: " + result.getEmail() + "\n License: Trainee");
-                        builder1.setPositiveButton("Dismiss", (dialog, which) -> toProfile());
-
-                        builder1.show();
 
                         myPreferences = getSharedPreferences(USER_PREFS, Context.MODE_PRIVATE);
                         myEditor = myPreferences.edit();
                         myEditor.putString("userType", "normalUser");
+                        myEditor.putBoolean("isLogged", true);
+                        assert result != null;
                         myEditor.putString("userName", result.getName());
                         myEditor.putString("userEmail", result.getEmail());
                         myEditor.putString("userPassword", result.getPassword());
@@ -231,6 +240,29 @@ public class userAuthentication extends AppCompatActivity {
                         myEditor.putInt("userGainedWeight", result.getGainedWeight());
                         myEditor.putInt("userTrainedHrs", result.getTrainedHrs());
                         myEditor.apply();
+
+                        if (result.getLastUpdated() == null || result.getLastUpdated().equals("0")) {
+                            myPreferences = getSharedPreferences(DATE, Context.MODE_PRIVATE);
+                            myEditor = myPreferences.edit();
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                myEditor.putString("LAST_DATE", String.valueOf(LocalDate.now()));
+                            }
+                            myEditor.apply();
+                        } else {
+                            myPreferences = getSharedPreferences(DATE, Context.MODE_PRIVATE);
+                            myEditor = myPreferences.edit();
+                            myEditor.putString("LAST_DATE", result.getLastUpdated());
+                            myEditor.apply();
+                        }
+
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(userAuthentication.this);
+                        builder1.setTitle("Hello " + result.getName());
+                        builder1.setMessage(" Email: " + result.getEmail() + "\n License: Trainee");
+                        builder1.setPositiveButton("Dismiss", (dialog, which) -> toProfile());
+
+                        builder1.show();
+
+
                     } else if (response.code() == 400) {
                         Toast.makeText(userAuthentication.this, "Wrong Credentials", Toast.LENGTH_LONG).show();
                     }

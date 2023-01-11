@@ -18,10 +18,10 @@ import java.util.Objects;
 public class globalAuthentication extends AppCompatActivity {
 
     Button traineeBtn, gymOwnerBtn;
-    Button backBtn;
     TextView continueWithoutSignup;
     boolean WifiConnected = false;
     boolean MobileDataConnected = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +32,6 @@ public class globalAuthentication extends AppCompatActivity {
 
         traineeBtn = findViewById(R.id.login);
         gymOwnerBtn = findViewById(R.id.signup);
-        backBtn = findViewById(R.id.BackBtn);
-        initBackBtn();
 
         initTraineeBtn();
         initGymOwnerBtn();
@@ -46,14 +44,6 @@ public class globalAuthentication extends AppCompatActivity {
 
         continueWithoutSignup = findViewById(R.id.continueWithoutSignup);
         init_continueWithoutSignup();
-    }
-
-    private void initBackBtn() {
-        backBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(globalAuthentication.this, Profile.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-        });
     }
 
     private void initGymOwnerBtn() {

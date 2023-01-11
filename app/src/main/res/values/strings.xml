@@ -93,4 +93,6 @@
     <string name="allowed_gender">Allowed Gender</string>
     <string name="monthly_subscription">Monthly Subscription</string>
     <string name="open_hours">Open Hours</string>
+    <string name="weight_graph">Weight Graph</string>
+    <string name="training_graph">Training Graph</string>
 </resources>

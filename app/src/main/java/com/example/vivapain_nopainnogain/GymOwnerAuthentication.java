@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Objects;
@@ -41,6 +43,7 @@ public class GymOwnerAuthentication extends AppCompatActivity {
     SharedPreferences myPreferences;
     SharedPreferences.Editor myEditor;
     private static final String USER_PREFS = "signedIn";
+    private static final String DATE = "DATE";
 
     @SuppressLint("SimpleDateFormat")
     SimpleDateFormat sdf = new SimpleDateFormat("y:M");
@@ -139,6 +142,9 @@ public class GymOwnerAuthentication extends AppCompatActivity {
             map.put("password", passwordEdit.getText().toString());
             map.put("age", ageEdit.getText().toString());
             map.put("weight", weightEdit.getText().toString());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                map.put("lastUpdated", String.valueOf(LocalDate.now()));
+            }
 
             Call<Void> call = retrofitInterface.executeSignup(map);
             call.enqueue(new Callback<Void>() {
@@ -157,6 +163,7 @@ public class GymOwnerAuthentication extends AppCompatActivity {
                         myPreferences = getSharedPreferences(USER_PREFS, Context.MODE_PRIVATE);
                         myEditor = myPreferences.edit();
                         myEditor.putString("userType", "GymOwner");
+                        myEditor.putBoolean("isLogged", true);
                         myEditor.putString("userCreatedAt", date);
                         myEditor.putString("userName", nameEdit.getText().toString());
                         myEditor.putString("userEmail", emailEdit.getText().toString());
@@ -166,6 +173,13 @@ public class GymOwnerAuthentication extends AppCompatActivity {
                         myEditor.putInt("userLostWeight", 0);
                         myEditor.putInt("userGainedWeight", 0);
                         myEditor.putInt("userTrainedHrs", 0);
+                        myEditor.apply();
+
+                        myPreferences = getSharedPreferences(DATE, Context.MODE_PRIVATE);
+                        myEditor = myPreferences.edit();
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            myEditor.putString("LAST_DATE", String.valueOf(LocalDate.now()));
+                        }
                         myEditor.apply();
 
 
@@ -212,26 +226,44 @@ public class GymOwnerAuthentication extends AppCompatActivity {
                 public void onResponse(@NonNull Call<LoginResult> call, @NonNull Response<LoginResult> response) {
                     if (response.code() == 200) {
                         LoginResult result = response.body();
-                        AlertDialog.Builder builder1 = new AlertDialog.Builder(GymOwnerAuthentication.this);
-                        assert result != null;
-                        builder1.setTitle("Hello " + result.getName());
-                        builder1.setMessage(" Email: " + result.getEmail() + "\n License: Gym Owner");
-                        builder1.setPositiveButton("Dismiss", (dialog, which) -> toProfile());
-
-                        builder1.show();
 
                         myPreferences = getSharedPreferences(USER_PREFS, Context.MODE_PRIVATE);
                         myEditor = myPreferences.edit();
                         myEditor.putString("userType", "GymOwner");
+                        myEditor.putBoolean("isLogged", true);
+                        assert result != null;
                         myEditor.putString("userName", result.getName());
                         myEditor.putString("userEmail", result.getEmail());
                         myEditor.putString("userPassword", result.getPassword());
                         myEditor.putInt("userAge", result.getAge());
                         myEditor.putInt("userWeight", result.getWeight());
                         myEditor.putInt("userLostWeight", result.getLostWeight());
-                        myEditor.putInt("userGainedWeight", result.getLostWeight());
+                        myEditor.putInt("userGainedWeight", result.getGainedWeight());
                         myEditor.putInt("userTrainedHrs", result.getTrainedHrs());
                         myEditor.apply();
+
+                        if (result.getLastUpdated() == null || result.getLastUpdated().equals("0")) {
+                            myPreferences = getSharedPreferences(DATE, Context.MODE_PRIVATE);
+                            myEditor = myPreferences.edit();
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                myEditor.putString("LAST_DATE", String.valueOf(LocalDate.now()));
+                            }
+                            myEditor.apply();
+                        } else {
+                            myPreferences = getSharedPreferences(DATE, Context.MODE_PRIVATE);
+                            myEditor = myPreferences.edit();
+                            myEditor.putString("LAST_DATE", result.getLastUpdated());
+                            myEditor.apply();
+                        }
+
+
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(GymOwnerAuthentication.this);
+                        builder1.setTitle("Hello " + result.getName());
+                        builder1.setMessage(" Email: " + result.getEmail() + "\n License: Gym Owner");
+                        builder1.setPositiveButton("Dismiss", (dialog, which) -> toProfile());
+
+                        builder1.show();
+
                     } else if (response.code() == 400) {
                         Toast.makeText(GymOwnerAuthentication.this, "Wrong Credentials", Toast.LENGTH_LONG).show();
                     }

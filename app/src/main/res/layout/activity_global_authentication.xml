@@ -14,15 +14,6 @@
         android:text="@string/i_m_a_trainee" />
 
     <Button
-        android:id="@+id/BackBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="Back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
         android:id="@+id/signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,7 +32,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="-54dp"
         android:layout_marginBottom="151dp"
-        app:srcCompat="@drawable/onlylogoviva" />
+        app:srcCompat="@drawable/onlylogoviva"
+        android:contentDescription="@string/todo" />
 
     <TextView
         android:id="@+id/textView23"
@@ -66,7 +58,7 @@
         android:layout_marginTop="31dp"
         android:layout_marginEnd="-18dp"
         android:text="@string/continue_without_signing_in"
-        android:textColor="#2196F3" />
+        android:textColor="#1976D2" />
 
 
 </RelativeLayout>

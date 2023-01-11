@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -20,6 +21,14 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class Gym_Near_By extends FragmentActivity implements OnMapReadyCallback {
 
     GoogleMap map;
@@ -27,10 +36,20 @@ public class Gym_Near_By extends FragmentActivity implements OnMapReadyCallback 
     boolean WifiConnected = false;
     boolean MobileDataConnected = false;
 
+    private RetrofitInterface retrofitInterface;
+
+    SharedPreferences UserPrefs;
+    private static final String USER_PREFS = "signedIn";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gym_near_by);
+
+        String baseURL = "http://10.0.2.2:3000";
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(baseURL).addConverterFactory(GsonConverterFactory.create()).build();
+        retrofitInterface = retrofit.create(RetrofitInterface.class);
+
         dismiss = findViewById(R.id.dismiss);
         gym_details = findViewById(R.id.gym_details);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -46,6 +65,27 @@ public class Gym_Near_By extends FragmentActivity implements OnMapReadyCallback 
     }
 
     private void initGymDetails() {
+
+        Call<ArrayList<gymDetailsModule>> call = retrofitInterface.executeGymDetails();
+        call.enqueue(new Callback<ArrayList<gymDetailsModule>>() {
+            @Override
+            public void onResponse(@NonNull Call<ArrayList<gymDetailsModule>> call, @NonNull Response<ArrayList<gymDetailsModule>> response) {
+                if (response.code() == 200) {
+                    ArrayList<gymDetailsModule> details = response.body();
+                    PrefConfig.writeListInPref(getApplicationContext(), details);
+                    Log.d("gyms detailed retrieve", "Gyms retrieval was a success.");
+                } else if (response.code() == 400) {
+                    Log.d("gyms detailed retrieve", "Gyms retrieval failed.");
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ArrayList<gymDetailsModule>> call, @NonNull Throwable t) {
+                Log.w("gyms detailed retrieve", "Gyms retrieval failed" + t.getMessage());
+            }
+        });
+
+
         gym_details.setOnClickListener(v -> {
             Intent intent = new Intent(Gym_Near_By.this, gym_detailed.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

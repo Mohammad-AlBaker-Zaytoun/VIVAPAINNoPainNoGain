@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Objects;
@@ -35,7 +37,11 @@ public class ChangeData extends AppCompatActivity {
 
     SharedPreferences.Editor myEditor;
     SharedPreferences UserPrefs;
+    SharedPreferences DATEe;
     private static final String USER_PREFS = "signedIn";
+    private static final String DATE = "DATE";
+
+    LocalDate todayDate;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -43,6 +49,7 @@ public class ChangeData extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_data);
         Objects.requireNonNull(getSupportActionBar()).hide();
+
         age = findViewById(R.id.AgeET);
         weightLost = findViewById(R.id.WeightET);
         weightGained = findViewById(R.id.weightGainedEditTxt);
@@ -62,6 +69,11 @@ public class ChangeData extends AppCompatActivity {
     private void initSaveBtn() {
         saveBTN.setOnClickListener(v -> {
             UserPrefs = getSharedPreferences(USER_PREFS, Context.MODE_PRIVATE);
+            DATEe = getSharedPreferences(DATE, Context.MODE_PRIVATE);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                todayDate = LocalDate.now();
+            }
 
 
             String UName = UserPrefs.getString("userName", "Username");
@@ -71,7 +83,7 @@ public class ChangeData extends AppCompatActivity {
             int UTrainedHrz = Integer.parseInt(trainedHours.getText().toString());
             int oldUWeight = UserPrefs.getInt("userWeight", 1);
             int UWeight = oldUWeight - UWeightLost + UWeightGained;
-            String CreatedAt = UserPrefs.getString("userCreatedAt", "00");
+            String CreatedAt = UserPrefs.getString("userCreatedAt", "2022:12");
             myEditor = UserPrefs.edit();
             myEditor.putInt("userAge", UAge);
             myEditor.putInt("userWeight", UWeight);
@@ -79,6 +91,11 @@ public class ChangeData extends AppCompatActivity {
             myEditor.putInt("userGainedWeight", UWeightGained);
             myEditor.putInt("userTrainedHrs", UTrainedHrz);
             myEditor.apply();
+
+            myEditor = DATEe.edit();
+            myEditor.putString("DATE", String.valueOf(todayDate));
+            myEditor.apply();
+
             int UTrainedHrs = Integer.parseInt(trainedHours.getText().toString());
 
 
@@ -87,6 +104,7 @@ public class ChangeData extends AppCompatActivity {
                 HashMap<String, String> map = new HashMap<>();
                 String date = sdf.format(new Date(new Date().getTime()));
                 map.put("date", date);
+                map.put("lastUpdated", String.valueOf(todayDate));
                 map.put("CreatedAt", CreatedAt);
                 map.put("email", UserPrefs.getString("userEmail", "email"));
                 map.put("password", UserPrefs.getString("userPassword", "password"));
@@ -115,6 +133,10 @@ public class ChangeData extends AppCompatActivity {
                 });
             } else if (userType.equals("normalUser")) {
                 HashMap<String, String> map = new HashMap<>();
+                String date = sdf.format(new Date(new Date().getTime()));
+                map.put("date", date);
+                map.put("lastUpdated", String.valueOf(todayDate));
+                map.put("CreatedAt", CreatedAt);
                 map.put("email", UserPrefs.getString("userEmail", "email"));
                 map.put("password", UserPrefs.getString("userPassword", "password"));
                 map.put("name", UName);

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.Switch;
@@ -20,6 +21,7 @@ import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -52,6 +54,11 @@ public class graphC extends AppCompatActivity {
     int TrainingHr2 = 0;
     int TrainingHr3 = 0;
     int TrainingHr4 = 0;
+
+    String date1S = "";
+    String date2S = "";
+    String date3S = "";
+    String date4S = "";
 
     @SuppressLint("SimpleDateFormat")
     SimpleDateFormat sdf = new SimpleDateFormat("y:M");
@@ -86,7 +93,11 @@ public class graphC extends AppCompatActivity {
         STATS = switchGraphStat.getBoolean("stats", false);
         switchGraph.setChecked(STATS);
 
-        initGraph();
+        try {
+            initGraph();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         initSwitch();
         initBackBtn();
         initSwitch();
@@ -102,12 +113,22 @@ public class graphC extends AppCompatActivity {
         weight4 = details.get(3).getLostWeight();
 
         TrainingHr1 = details.get(0).getTrainedHrs();
-        TrainingHr1 = details.get(1).getTrainedHrs();
-        TrainingHr1 = details.get(2).getTrainedHrs();
-        TrainingHr1 = details.get(3).getTrainedHrs();
+        TrainingHr2 = details.get(1).getTrainedHrs();
+        TrainingHr3 = details.get(2).getTrainedHrs();
+        TrainingHr4 = details.get(3).getTrainedHrs();
+
+        date1S = details.get(3).getDate();
+        date2S = details.get(2).getDate();
+        date3S = details.get(1).getDate();
+        date4S = details.get(0).getDate();
+
+        Log.d("GRAPH DATA POINT NS 1", String.valueOf(date1S));
+        Log.d("GRAPH DATA POINT NS 2", String.valueOf(date2S));
+        Log.d("GRAPH DATA POINT NS 3", String.valueOf(date3S));
+        Log.d("GRAPH DATA POINT NS 4", String.valueOf(date4S));
     }
 
-    private void initGraph() {
+    private void initGraph() throws ParseException {
         if (STATS) {
             initGraphTrainedHours();
         } else {
@@ -132,14 +153,40 @@ public class graphC extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void initGraphTrainedHours() {
+    private void delay() {
+        final Handler handler = new Handler();
+        handler.postDelayed(() -> {
+            //just a delay
+        }, 20); // delay time in milliseconds
+
+
+    }
+
+    private void initGraphTrainedHours() throws ParseException {
         graph = findViewById(R.id.graph);
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[]{
-                new DataPoint(new Date().getTime(), TrainingHr1),
-                new DataPoint(new Date().getTime(), TrainingHr2),
-                new DataPoint(new Date().getTime(), TrainingHr3),
-                new DataPoint(new Date().getTime(), TrainingHr4)
-        });
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
+
+        Date date1 = sdf.parse(date1S);
+        Date date2 = sdf.parse(date2S);
+        Date date3 = sdf.parse(date3S);
+        Date date4 = sdf.parse(date4S);
+        Log.d("GRAPH DATA POINT 1", String.valueOf(date1));
+        Log.d("GRAPH DATA POINT 2", String.valueOf(date2));
+        Log.d("GRAPH DATA POINT 3", String.valueOf(date3));
+        Log.d("GRAPH DATA POINT 4", String.valueOf(date4));
+
+        assert date1 != null;
+        series.appendData(new DataPoint(date1, TrainingHr1), true, 4);
+        delay();
+        assert date2 != null;
+        series.appendData(new DataPoint(date2, TrainingHr2), true, 4);
+        delay();
+        assert date3 != null;
+        series.appendData(new DataPoint(date3, TrainingHr3), true, 4);
+        delay();
+        assert date4 != null;
+        series.appendData(new DataPoint(date4, TrainingHr4), true, 4);
+
         graph.addSeries(series);
         series.setAnimated(true);
         series.setThickness(7);
@@ -168,14 +215,31 @@ public class graphC extends AppCompatActivity {
         gridLabel.setVerticalAxisTitleTextSize(25);
     }
 
-    private void initGraphWeight() {
+    private void initGraphWeight() throws ParseException {
         graph = findViewById(R.id.graph);
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[]{
-                new DataPoint(new Date().getTime(), weight1),
-                new DataPoint(new Date().getTime(), weight2),
-                new DataPoint(new Date().getTime(), weight3),
-                new DataPoint(new Date().getTime(), weight4)
-        });
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
+
+        Date date1 = sdf.parse(date1S);
+        Date date2 = sdf.parse(date2S);
+        Date date3 = sdf.parse(date3S);
+        Date date4 = sdf.parse(date4S);
+        Log.d("GRAPH DATA POINT 1", String.valueOf(date1));
+        Log.d("GRAPH DATA POINT 2", String.valueOf(date2));
+        Log.d("GRAPH DATA POINT 3", String.valueOf(date3));
+        Log.d("GRAPH DATA POINT 4", String.valueOf(date4));
+
+        assert date1 != null;
+        series.appendData(new DataPoint(date1, weight1), false, 4);
+        delay();
+        assert date2 != null;
+        series.appendData(new DataPoint(date2, weight2), false, 4);
+        delay();
+        assert date3 != null;
+        series.appendData(new DataPoint(date3, weight3), false, 4);
+        delay();
+        assert date4 != null;
+        series.appendData(new DataPoint(date4, weight4), false, 4);
+
         graph.addSeries(series);
         series.setAnimated(true);
         series.setThickness(7);
@@ -199,7 +263,6 @@ public class graphC extends AppCompatActivity {
         });
 
         GridLabelRenderer gridLabel = graph.getGridLabelRenderer();
-//        gridLabel.setHorizontalAxisTitle("DATE");
         gridLabel.setHorizontalAxisTitleTextSize(25);
         gridLabel.setVerticalAxisTitle("WEIGHT");
         gridLabel.setVerticalAxisTitleTextSize(25);
