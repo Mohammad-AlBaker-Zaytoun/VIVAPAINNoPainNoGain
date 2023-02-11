@@ -16,7 +16,6 @@ public class Contact extends AppCompatActivity {
 
     Button email, whatsapp;
     Button backBtn;
-    ImageButton settings, about, contactUs;
     ImageButton homeRedirect, mapRedirect;
 
     @Override
@@ -24,9 +23,6 @@ public class Contact extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact);
         Objects.requireNonNull(getSupportActionBar()).hide();
-        settings = findViewById(R.id.Settings);
-        about = findViewById(R.id.AboutUs);
-        contactUs = findViewById(R.id.ContactUs);
         homeRedirect = findViewById(R.id.Home);
         mapRedirect = findViewById(R.id.Map);
         email = findViewById(R.id.EmailUs);
@@ -35,9 +31,6 @@ public class Contact extends AppCompatActivity {
         initBackBtn();
         initEmail();
         initWhatsapp();
-        initSettings();
-        initAbout();
-        initContactUs();
         initHomeRedirect();
         initMapRedirect();
     }
@@ -87,23 +80,6 @@ public class Contact extends AppCompatActivity {
         });
     }
 
-    private void initContactUs() {
-        contactUs.setOnClickListener(v -> {
-            Intent intent = new Intent(Contact.this, Contact.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-        });
-    }
-
-    private void initAbout() {
-        about.setOnClickListener(v -> {
-            Intent intent = new Intent(Contact.this, About.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-        });
-    }
-
-
     private void initMapRedirect() {
         mapRedirect.setOnClickListener(v -> {
             Intent intent = new Intent(Contact.this, Gym_Near_By.class);
@@ -112,12 +88,4 @@ public class Contact extends AppCompatActivity {
         });
     }
 
-
-    private void initSettings() {
-        settings.setOnClickListener(v -> {
-            Intent intent = new Intent(Contact.this, Settings.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-        });
-    }
 }

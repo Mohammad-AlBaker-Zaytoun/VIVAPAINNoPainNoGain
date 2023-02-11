@@ -10,18 +10,6 @@ public class VivaDBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "VIVA.db";
     private static final int DATABASE_VERSION = 1;
 
-    private static final String Create_TABLE_Food = "Create table Food (" +
-            "_FID integer primary key autoincrement," +
-            "FoodName text not null);";
-
-    private static final String Create_TABLE_PROFILE = "Create table Profile (" +
-            "_PID integer primary key autoincrement," +
-            "PName text not null," +
-            "PAge integer not null," +
-            "WeightLost integer not null," +
-            "TrainedHours integer not null," +
-            "picture blob);";
-
     private static final String Create_TABLE_ACTIVITY = "Create table Activity (" +
             "_id integer primary key autoincrement," +
             "ActivityName text not null);";
@@ -47,8 +35,6 @@ public class VivaDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(Create_TABLE_Food);
-        db.execSQL(Create_TABLE_PROFILE);
         db.execSQL(Create_TABLE_ACTIVITY);
         db.execSQL(Seed_TABLE_ACTIVITY1);
         db.execSQL(Seed_TABLE_ACTIVITY2);
@@ -59,8 +45,6 @@ public class VivaDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS Food");
-        db.execSQL("DROP TABLE IF EXISTS Profile");
         db.execSQL("DROP TABLE IF EXISTS Activity");
         onCreate(db);
     }

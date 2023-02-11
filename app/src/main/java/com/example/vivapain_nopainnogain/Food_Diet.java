@@ -2,7 +2,6 @@ package com.example.vivapain_nopainnogain;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
@@ -53,69 +52,51 @@ public class Food_Diet extends AppCompatActivity {
     }
 
     private void initCheckSnacks3() {
-        checkSnacks3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Food_Diet.this, Snacks3.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
+        checkSnacks3.setOnClickListener(v -> {
+            Intent intent = new Intent(Food_Diet.this, Snacks3.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
         });
     }
 
     private void initCheckSnacks2() {
-        checkSnacks2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Food_Diet.this, Snacks2.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
+        checkSnacks2.setOnClickListener(v -> {
+            Intent intent = new Intent(Food_Diet.this, Snacks2.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
         });
     }
 
     private void initCheckSnacks1() {
-        checkSnacks1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Food_Diet.this, Snacks1.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
+        checkSnacks1.setOnClickListener(v -> {
+            Intent intent = new Intent(Food_Diet.this, Snacks1.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
         });
     }
 
     private void initCheckLunch() {
-        checkLunch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Food_Diet.this, Lunch.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
+        checkLunch.setOnClickListener(v -> {
+            Intent intent = new Intent(Food_Diet.this, Lunch.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
         });
 
     }
 
     private void initCheckDinner() {
-        checkDinner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Food_Diet.this, Dinner.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
+        checkDinner.setOnClickListener(v -> {
+            Intent intent = new Intent(Food_Diet.this, Dinner.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
         });
     }
 
     private void initCheckBreakfast() {
-        checkBreakfast.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Food_Diet.this, Breakfast.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
+        checkBreakfast.setOnClickListener(v -> {
+            Intent intent = new Intent(Food_Diet.this, Breakfast.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
         });
     }
 

@@ -38,9 +38,6 @@ public class Gym_Near_By extends FragmentActivity implements OnMapReadyCallback 
 
     private RetrofitInterface retrofitInterface;
 
-    SharedPreferences UserPrefs;
-    private static final String USER_PREFS = "signedIn";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

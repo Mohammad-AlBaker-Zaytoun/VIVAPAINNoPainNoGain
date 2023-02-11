@@ -10,8 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Objects;
 
 public class About extends AppCompatActivity {
-
-    ImageButton settings, about, contactUs;
     ImageButton homeRedirect, mapRedirect;
     Button backBtn;
 
@@ -20,16 +18,10 @@ public class About extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
         Objects.requireNonNull(getSupportActionBar()).hide();
-        settings = findViewById(R.id.Settings);
-        about = findViewById(R.id.AboutUs);
-        contactUs = findViewById(R.id.ContactUs);
         homeRedirect = findViewById(R.id.Home);
         mapRedirect = findViewById(R.id.Map);
         backBtn = findViewById(R.id.BackBtn);
         initBackBtn();
-        initSettings();
-        initAbout();
-        initContactUs();
         initHomeRedirect();
         initMapRedirect();
     }
@@ -53,30 +45,6 @@ public class About extends AppCompatActivity {
     private void initHomeRedirect() {
         homeRedirect.setOnClickListener(v -> {
             Intent intent = new Intent(About.this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-        });
-    }
-
-    private void initContactUs() {
-        contactUs.setOnClickListener(v -> {
-            Intent intent = new Intent(About.this, Contact.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-        });
-    }
-
-    private void initAbout() {
-        about.setOnClickListener(v -> {
-            Intent intent = new Intent(About.this, About.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-        });
-    }
-
-    private void initSettings() {
-        settings.setOnClickListener(v -> {
-            Intent intent = new Intent(About.this, Settings.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         });

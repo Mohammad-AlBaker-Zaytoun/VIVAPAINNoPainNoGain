@@ -8,8 +8,6 @@ public class LoginResult1 {         //For users
 
     private final String password;
 
-    private final String Created_At;
-
     private final String lastUpdated;
 
     private final int age;
@@ -22,11 +20,10 @@ public class LoginResult1 {         //For users
 
     private final int trainedHrs;
 
-    public LoginResult1(String name, String email, String password, String created_at, String lastUpdated, int age, int weight, int lostWeight, int gainedWeight, int trainedHrs) {
+    public LoginResult1(String name, String email, String password, String lastUpdated, int age, int weight, int lostWeight, int gainedWeight, int trainedHrs) {
         this.name = name;
         this.email = email;
         this.password = password;
-        Created_At = created_at;
         this.lastUpdated = lastUpdated;
         this.age = age;
         this.weight = weight;
@@ -71,7 +68,4 @@ public class LoginResult1 {         //For users
         return lastUpdated;
     }
 
-    public String getCreated_At() {
-        return Created_At;
-    }
 }
