@@ -14,7 +14,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:videoId="M_mJC7Vg_qc" />
+        app:videoId="M_mJC7Vg_qc"
+        tools:ignore="VisualLintBounds" />
 
     <TextView
         android:id="@+id/textView20"
@@ -25,17 +26,19 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/youtube_player_view" />
+        app:layout_constraintTop_toBottomOf="@+id/youtube_player_view"
+        tools:ignore="VisualLintBounds" />
 
     <TextView
         android:id="@+id/textView21"
-        android:layout_width="395dp"
-        android:layout_height="184dp"
+        android:layout_width="310dp"
+        android:layout_height="307dp"
         android:layout_marginTop="56dp"
         android:text="@string/abdominal_exercises_are_a_type_of_strength_exercise_that_affect_the_abdominal_muscles_colloquially_known_as_the_stomach_muscles_or_abs_n_nhuman_abdominal_consist_of_four_muscles_which_are_the_rectos_abdomens_internal_oblique_external_oblique_and_transversus_abdominis_n_nwhen_performing_abdominal_exercises_it_is_important_to_understand_the_effects_functions_the_types_of_exercises_and_think_about_how_to_perform_this_exercise_safely"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView20" />
+        app:layout_constraintTop_toBottomOf="@+id/textView20"
+        tools:ignore="TextSizeCheck,VisualLintBounds" />
 
     <ImageButton
         android:id="@+id/BackImageBtn"
@@ -46,6 +49,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/youtube_player_view"
         app:srcCompat="@android:drawable/btn_dialog"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="ContentDescription,SpeakableTextPresentCheck,VisualLintBounds" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

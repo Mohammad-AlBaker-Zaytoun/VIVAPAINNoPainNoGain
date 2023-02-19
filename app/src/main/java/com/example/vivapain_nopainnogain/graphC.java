@@ -190,7 +190,7 @@ public class graphC extends AppCompatActivity {
         graph.addSeries(series);
         series.setAnimated(true);
         series.setThickness(7);
-        series.setTitle("Trained Hrs");
+        series.setTitle("TRAINED HRS");
         graph.setTitle("PROGRESS");
         graph.setTitleTextSize(50);
 
@@ -211,7 +211,7 @@ public class graphC extends AppCompatActivity {
 
         GridLabelRenderer gridLabel = graph.getGridLabelRenderer();
         gridLabel.setHorizontalAxisTitleTextSize(25);
-        gridLabel.setVerticalAxisTitle("Trained Hrs");
+        gridLabel.setVerticalAxisTitle("TRAINED HRS");
         gridLabel.setVerticalAxisTitleTextSize(25);
     }
 
@@ -243,7 +243,7 @@ public class graphC extends AppCompatActivity {
         graph.addSeries(series);
         series.setAnimated(true);
         series.setThickness(7);
-        series.setTitle("weight");
+        series.setTitle("LOST WEIGHT");
         graph.setTitle("PROGRESS");
         graph.setTitleTextSize(50);
 
@@ -264,7 +264,7 @@ public class graphC extends AppCompatActivity {
 
         GridLabelRenderer gridLabel = graph.getGridLabelRenderer();
         gridLabel.setHorizontalAxisTitleTextSize(25);
-        gridLabel.setVerticalAxisTitle("WEIGHT");
+        gridLabel.setVerticalAxisTitle("LOST WEIGHT");
         gridLabel.setVerticalAxisTitleTextSize(25);
     }
 

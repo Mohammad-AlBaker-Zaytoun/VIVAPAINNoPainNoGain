@@ -66,20 +66,8 @@
         app:layout_constraintBottom_toTopOf="@+id/navbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.044" />
-
-    <ImageButton
-        android:id="@+id/Settings"
-        android:layout_width="95dp"
-        android:layout_height="71dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/cardview_shadow_end_color"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.996"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/settings" />
+        app:layout_constraintVertical_bias="0.044"
+        tools:ignore="TextSizeCheck" />
 
 
     <LinearLayout
@@ -101,7 +89,8 @@
             android:scaleType="centerCrop"
             android:scaleX="0.7"
             android:scaleY="0.7"
-            app:srcCompat="@drawable/map" />
+            app:srcCompat="@drawable/map"
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
         <ImageButton
             android:id="@+id/Home"
@@ -112,7 +101,8 @@
             android:scaleType="centerCrop"
             android:scaleX="0.7"
             android:scaleY="0.7"
-            app:srcCompat="@drawable/home" />
+            app:srcCompat="@drawable/home"
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
     </LinearLayout>
 
     <Button
@@ -213,6 +203,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.055"
         app:srcCompat="@android:drawable/btn_dialog"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

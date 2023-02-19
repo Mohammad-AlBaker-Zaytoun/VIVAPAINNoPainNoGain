@@ -14,7 +14,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:videoId="bqi4L0yjgp8" />
+        app:videoId="bqi4L0yjgp8"
+        tools:ignore="VisualLintBounds" />
 
     <TextView
         android:id="@+id/textView20"
@@ -25,12 +26,13 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/youtube_player_view" />
+        app:layout_constraintTop_toBottomOf="@+id/youtube_player_view"
+        tools:ignore="VisualLintBounds" />
 
     <TextView
         android:id="@+id/textView21"
-        android:layout_width="396dp"
-        android:layout_height="255dp"
+        android:layout_width="338dp"
+        android:layout_height="333dp"
         android:layout_marginTop="56dp"
         android:text="The triceps brachii is a large, thick muscle on the dorsal part of the upper arm.
     \n\nIt often appears as the shape of a horseshoe on the posterior aspect of the arm.
@@ -38,7 +40,8 @@
 \n\nIt is composed of three heads (tri = three, cep = head): a long head, a lateral head, and a medial head."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView20" />
+        app:layout_constraintTop_toBottomOf="@+id/textView20"
+        tools:ignore="HardcodedText,TextSizeCheck,VisualLintBounds" />
 
     <ImageButton
         android:id="@+id/BackImageBtn"
@@ -49,6 +52,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/youtube_player_view"
         app:srcCompat="@android:drawable/btn_dialog"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="ContentDescription,SpeakableTextPresentCheck,VisualLintBounds" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

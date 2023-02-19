@@ -65,6 +65,8 @@ public class Contact extends AppCompatActivity {
         emailIntent.setData(Uri.parse("mailto:"));
         emailIntent.setType("text/plain");
         emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"vivapain033@gmail.com"});
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "FEEDBACK");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "Dear developer, \nI'm here to tell you that the app is a brilliant idea! I was searching for such a tool that could help me with my daily training and my diet.\nKeep up the great work!\n\nBest regards,\nyour number one supporter.");
         try {
             startActivity(Intent.createChooser(emailIntent, "Choose email client"));
         } catch (Exception e) {

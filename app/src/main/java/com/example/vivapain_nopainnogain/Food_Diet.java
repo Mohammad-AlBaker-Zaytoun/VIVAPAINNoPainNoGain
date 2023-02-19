@@ -10,8 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Objects;
 
 public class Food_Diet extends AppCompatActivity {
-
-    ImageButton settings;
     ImageButton homeRedirect, mapRedirect;
     Button checkBreakfast, checkSnacks1, checkSnacks2, checkSnacks3, checkLunch, checkDinner;
     ImageButton backBtn;
@@ -21,7 +19,6 @@ public class Food_Diet extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_diet);
         Objects.requireNonNull(getSupportActionBar()).hide();
-        settings = findViewById(R.id.Settings);
         homeRedirect = findViewById(R.id.Home);
         mapRedirect = findViewById(R.id.Map);
         checkBreakfast = findViewById(R.id.CheckBreakFastBtn);
@@ -37,7 +34,6 @@ public class Food_Diet extends AppCompatActivity {
         initCheckSnacks1();
         initCheckSnacks2();
         initCheckSnacks3();
-        initSettings();
         initHomeRedirect();
         initMapRedirect();
         initBackBtn();
@@ -111,14 +107,6 @@ public class Food_Diet extends AppCompatActivity {
     private void initHomeRedirect() {
         homeRedirect.setOnClickListener(v -> {
             Intent intent = new Intent(Food_Diet.this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-        });
-    }
-
-    private void initSettings() {
-        settings.setOnClickListener(v -> {
-            Intent intent = new Intent(Food_Diet.this, Settings.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         });

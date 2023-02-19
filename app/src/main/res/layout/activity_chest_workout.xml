@@ -14,7 +14,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:videoId="epxIVzIkn2w" />
+        app:videoId="epxIVzIkn2w"
+        tools:ignore="VisualLintBounds" />
 
     <TextView
         android:id="@+id/textView20"
@@ -25,18 +26,19 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/youtube_player_view" />
+        app:layout_constraintTop_toBottomOf="@+id/youtube_player_view"
+        tools:ignore="VisualLintBounds" />
 
     <TextView
         android:id="@+id/textView21"
-        android:layout_width="395dp"
-        android:layout_height="220dp"
+        android:layout_width="342dp"
+        android:layout_height="311dp"
         android:layout_marginTop="56dp"
-        android:text="The chest muscles could be considered a defining part of strength anatomy. They are involved in actions such as squeezing a set of loppers to cut a tree branch and pushing a door open. They are also the primary muscles referenced when debating upper body strength.
-\n\nFor body builders and those interested in general muscular aesthetics, the chest muscles are the defining part of muscle mass. Powerlifters rely on them for the bench press to score the greatest lift.But these muscles are also incredibly important from a functional standpoint because they support the movement of the arms."
+        android:text="@string/the_chest_muscles_could_be_considered_a_defining_part_of_strength_anatomy_they_are_involved_in_actions_such_as_squeezing_a_set_of_loppers_to_cut_a_tree_branch_and_pushing_a_door_open_they_are_also_the_primary_muscles_referenced_when_debating_upper_body_strength_n_nfor_body_builders_and_those_interested_in_general_muscular_aesthetics_the_chest_muscles_are_the_defining_part_of_muscle_mass_powerlifters_rely_on_them_for_the_bench_press_to_score_the_greatest_lift_but_these_muscles_are_also_incredibly_important_from_a_functional_standpoint_because_they_support_the_movement_of_the_arms"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView20" />
+        app:layout_constraintTop_toBottomOf="@+id/textView20"
+        tools:ignore="TextSizeCheck,VisualLintBounds" />
 
     <ImageButton
         android:id="@+id/BackImageBtn"
@@ -47,6 +49,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/youtube_player_view"
         app:srcCompat="@android:drawable/btn_dialog"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="ContentDescription,SpeakableTextPresentCheck,VisualLintBounds" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
