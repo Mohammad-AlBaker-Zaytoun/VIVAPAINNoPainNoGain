@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="68dp"
-        android:text="Back"
+        android:text="@string/back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,12 +43,10 @@
         android:id="@+id/nextBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="196dp"
         android:layout_marginTop="68dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/next"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.521"
-        app:layout_constraintStart_toEndOf="@+id/BackBtn"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -63,13 +61,14 @@
 
     <TextView
         android:id="@+id/stepsTxt1"
-        android:layout_width="405dp"
-        android:layout_height="127dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:text="- One grapefruit \n- Two poached eggs (or fried in a non-stick pan)\n- Two slices whole\n- Grain toast with one pat of butter each \n- One cup low-fat milk \n- One cup of black coffee or herbal tea"
+        android:layout_width="382dp"
+        android:layout_height="145dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/one_grapefruit_n_two_poached_eggs_or_fried_in_a_non_stick_pan_n_two_slices_whole_n_grain_toast_with_one_pat_of_butter_each_n_one_cup_low_fat_milk_n_one_cup_of_black_coffee_or_herbal_tea"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+        app:layout_constraintTop_toBottomOf="@+id/textView17"
+        tools:ignore="TextSizeCheck" />
 
     <TextView
         android:id="@+id/caloriesTxt1"
@@ -77,16 +76,17 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="164dp"
-        android:text="(Macronutrients: Approximately 555 calories with 27 grams protein, 63 grams carbohydrates, and 23 grams fat)"
+        android:text="@string/macronutrients_approximately_555_calories_with_27_grams_protein_63_grams_carbohydrates_and_23_grams_fat"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+        app:layout_constraintTop_toBottomOf="@+id/textView17"
+        tools:ignore="VisualLintBounds" />
 
     <TextView
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
-        android:text="Steps"
+        android:text="@string/steps"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/textView16"
         app:layout_constraintHorizontal_bias="0.325"
@@ -95,24 +95,29 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="336dp"
+        android:layout_width="408dp"
+        android:layout_height="306dp"
+        android:layout_marginTop="348dp"
+        android:contentDescription="@string/dinnerpic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView16"
-        app:srcCompat="@drawable/breakfast" />
+        app:srcCompat="@drawable/dinner"
+        tools:ignore="VisualLintBounds" />
 
     <ImageButton
         android:id="@+id/ExitIBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/BackBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.24"
-        app:srcCompat="@drawable/cast_ic_notification_disconnect" />
+        app:srcCompat="@drawable/cast_ic_notification_disconnect"
+        tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck"
+        android:contentDescription="@string/exit" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

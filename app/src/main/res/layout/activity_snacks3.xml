@@ -24,10 +24,10 @@
         android:text="@string/calories"
         app:layout_constraintBottom_toTopOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintHorizontal_bias="0.047"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/caloriesTxt1"
-        app:layout_constraintVertical_bias="0.521" />
+        app:layout_constraintVertical_bias="0.133" />
 
     <Button
         android:id="@+id/BackBtn"
@@ -63,11 +63,11 @@
 
     <TextView
         android:id="@+id/stepsTxt1"
-        android:layout_width="405dp"
-        android:layout_height="127dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="384dp"
+        android:layout_height="123dp"
+        android:layout_marginTop="24dp"
         android:text="- One grapefruit \n- Two poached eggs (or fried in a non-stick pan)\n- Two slices whole\n- Grain toast with one pat of butter each \n- One cup low-fat milk \n- One cup of black coffee or herbal tea"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
@@ -86,7 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
-        android:text="Steps"
+        android:text="@string/steps"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/textView16"
         app:layout_constraintHorizontal_bias="0.325"
@@ -95,20 +95,21 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="336dp"
+        android:layout_width="408dp"
+        android:layout_height="306dp"
+        android:layout_marginTop="352dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView16"
-        app:srcCompat="@drawable/breakfast" />
+        app:srcCompat="@drawable/snacks" />
 
     <ImageButton
         android:id="@+id/ExitIBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/BackBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

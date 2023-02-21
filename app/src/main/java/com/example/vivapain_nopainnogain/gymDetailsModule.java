@@ -10,7 +10,10 @@ public class gymDetailsModule {
     private final int dailyEntryPrice;
     private final int monthPlanPrice;
 
-    public gymDetailsModule(String location, int rating, int number, String genderAllowed, String workingTimes, int dailyEntryPrice, int monthPlanPrice) {
+    private final double Latitude;
+    private final double Longitude;
+
+    public gymDetailsModule(String location, int rating, int number, String genderAllowed, String workingTimes, int dailyEntryPrice, int monthPlanPrice, double latitude, double longitude) {
         this.location = location;
         this.rating = rating;
         this.number = number;
@@ -18,6 +21,8 @@ public class gymDetailsModule {
         this.workingTimes = workingTimes;
         this.dailyEntryPrice = dailyEntryPrice;
         this.monthPlanPrice = monthPlanPrice;
+        Latitude = latitude;
+        Longitude = longitude;
     }
 
     public String getName() {
@@ -57,4 +62,11 @@ public class gymDetailsModule {
         return workingTimes;
     }
 
+    public double getLatitude() {
+        return Latitude;
+    }
+
+    public double getLongitude() {
+        return Longitude;
+    }
 }

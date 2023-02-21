@@ -38,6 +38,10 @@ public class Gym_Near_By extends FragmentActivity implements OnMapReadyCallback 
 
     private RetrofitInterface retrofitInterface;
 
+    ArrayList<gymDetailsModule> detailsCOO;
+
+    int i;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +73,7 @@ public class Gym_Near_By extends FragmentActivity implements OnMapReadyCallback 
             public void onResponse(@NonNull Call<ArrayList<gymDetailsModule>> call, @NonNull Response<ArrayList<gymDetailsModule>> response) {
                 if (response.code() == 200) {
                     ArrayList<gymDetailsModule> details = response.body();
+                    detailsCOO = details;
                     PrefConfig.writeListInPref(getApplicationContext(), details);
                     Log.d("gyms detailed retrieve", "Gyms retrieval was a success.");
                 } else if (response.code() == 400) {
@@ -125,9 +130,13 @@ public class Gym_Near_By extends FragmentActivity implements OnMapReadyCallback 
     public void onMapReady(@NonNull GoogleMap googleMap) {
         //33.8938 , 35.5018 Beirut Latitude and Longitude
         map = googleMap;
-        float zoomLevel = 16.0f; //This goes up to 21
+        initGymDetails();
+        float zoomLevel = 13.0f; //This goes up to 21
+        for (i = 0; i < detailsCOO.size(); i++) {
+            LatLng POSITION = new LatLng(detailsCOO.get(i).getLatitude(), detailsCOO.get(i).getLongitude());
+            map.addMarker(new MarkerOptions().position(POSITION).title(detailsCOO.get(i).getName()));
+        }
         LatLng Beirut = new LatLng(33.8938, 35.5018);
-        map.addMarker(new MarkerOptions().position(Beirut).title("Beirut"));
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(Beirut, zoomLevel));
     }
 }

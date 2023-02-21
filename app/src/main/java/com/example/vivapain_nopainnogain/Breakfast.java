@@ -95,7 +95,7 @@ public class Breakfast extends AppCompatActivity {
         nextBtn.setOnClickListener(v -> {
             BreakFastNum++;
             if (BreakFastNum > 31) {
-                BreakFastNum = 0;
+                BreakFastNum = 1;
             }
             BreakFastPreferences = getSharedPreferences(USER_PREFS, Context.MODE_PRIVATE);
             myEditor = BreakFastPreferences.edit();
@@ -163,7 +163,7 @@ public class Breakfast extends AppCompatActivity {
     private void initBackBtn() {
         backBtn.setOnClickListener(v -> {
             BreakFastNum--;
-            if (BreakFastNum < 0) {
+            if (BreakFastNum < 1) {
                 BreakFastNum = 31;
             }
             BreakFastPreferences = getSharedPreferences(USER_PREFS, Context.MODE_PRIVATE);

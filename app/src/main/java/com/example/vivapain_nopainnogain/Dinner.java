@@ -94,7 +94,7 @@ public class Dinner extends AppCompatActivity {
         nextBtn.setOnClickListener(v -> {
             DinnerNum++;
             if (DinnerNum > 31) {
-                DinnerNum = 0;
+                DinnerNum = 1;
             }
             DinnerPreferences = getSharedPreferences(USER_PREFS, Context.MODE_PRIVATE);
             myEditor = DinnerPreferences.edit();
@@ -162,7 +162,7 @@ public class Dinner extends AppCompatActivity {
     private void initBackBtn() {
         backBtn.setOnClickListener(v -> {
             DinnerNum--;
-            if (DinnerNum < 0) {
+            if (DinnerNum < 1) {
                 DinnerNum = 31;
             }
             DinnerPreferences = getSharedPreferences(USER_PREFS, Context.MODE_PRIVATE);

@@ -81,12 +81,6 @@
             android:name=".Snacks3"
             android:exported="false" />
         <activity
-            android:name=".Snacks2"
-            android:exported="false" />
-        <activity
-            android:name=".Snacks1"
-            android:exported="false" />
-        <activity
             android:name=".Lunch"
             android:exported="false" />
         <activity

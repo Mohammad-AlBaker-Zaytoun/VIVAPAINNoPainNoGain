@@ -58,8 +58,7 @@ public class gym_detailed extends AppCompatActivity {
         }
 
         initAddGymBtn();
-
-
+        getGymsList();
         backBtn = findViewById(R.id.BackBtn);
         initBackBtn();
     }
