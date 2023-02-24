@@ -101,4 +101,8 @@
     <string name="macronutrients_approximately_555_calories_with_27_grams_protein_63_grams_carbohydrates_and_23_grams_fat">(Macronutrients: Approximately 555 calories with 27 grams protein, 63 grams carbohydrates, and 23 grams fat)</string>
     <string name="exit">Exit</string>
     <string name="dinnerpic">DinnerPic</string>
+    <string name="gym_address">Gym address</string>
+    <string name="monthly_plan">Monthly plan</string>
+    <string name="request">request</string>
+    <string name="cancel">cancel</string>
 </resources>

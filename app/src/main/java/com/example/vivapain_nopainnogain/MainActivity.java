@@ -354,9 +354,21 @@ public class MainActivity extends AppCompatActivity {
 
     private void initMapRedirect() {
         mapRedirect.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, Gym_Near_By.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
+            ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            if (networkInfo != null && networkInfo.isConnected()) {
+                WifiConnected = networkInfo.getType() == ConnectivityManager.TYPE_WIFI;
+                MobileDataConnected = networkInfo.getType() == ConnectivityManager.TYPE_MOBILE;
+                if (!WifiConnected && MobileDataConnected) {
+                    Toast.makeText(MainActivity.this, "You are using mobile data connection", Toast.LENGTH_LONG).show();
+                }
+                Intent intent = new Intent(MainActivity.this, Gym_Near_By.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            } else {
+                Toast.makeText(MainActivity.this, "NO CONNECTION!", Toast.LENGTH_SHORT).show();
+                noConnectionDialog();
+            }
         });
     }
 
